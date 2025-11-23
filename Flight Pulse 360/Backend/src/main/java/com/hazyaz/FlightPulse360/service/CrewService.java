@@ -5,11 +5,13 @@ import com.hazyaz.FlightPulse360.model.Vendor;
 import com.hazyaz.FlightPulse360.repository.CrewRepository;
 import com.hazyaz.FlightPulse360.util.FieldsUpdater;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
 
+@Service
 public class CrewService {
 
     @Autowired
@@ -18,8 +20,8 @@ public class CrewService {
     @Autowired
     FieldsUpdater fieldsUpdater;
 
-    public List<Crew> getAllCrew(){
-       return crewRepository.findAll();
+    public List<Crew> getAllCrew(String CompanyId){
+       return crewRepository.findAllByUxUniversalCompanyId(CompanyId);
     }
 
     public Crew updateCrew(String id, Map<String, Object> updates){

@@ -28,10 +28,9 @@ public class AircraftController {
     }
 
     @Operation(tags = "ET: Aircraft" ,description = "Allows the user to see all the aircraft")
-    @GetMapping("/all-aircraft")
-    public ResponseEntity<List<Aircraft>> all_aircraft(){
-
-        return ResponseEntity.ok(aircraftService.getAllAircraft());
+    @GetMapping("/all-aircraft/{companyId}")
+    public ResponseEntity<List<Aircraft>> all_aircraft(@PathVariable String companyId){
+        return ResponseEntity.ok(aircraftService.getAllAircraft(companyId));
     }
 
     @Operation(tags = "ET: Aircraft" ,description = "Allows the update aircraft")

@@ -21,9 +21,9 @@ public class CrewController {
 
     // CONTROLLERS for all the crews
     @Operation(tags = "ET: Crew" ,description = "Shows the list of all crews")
-    @GetMapping("/all-crew")
-    public ResponseEntity<List<Crew>> all_crew(){
-        return ResponseEntity.ok(crewService.getAllCrew());
+    @GetMapping("/all-crew/{companyId}")
+    public ResponseEntity<List<Crew>> all_crew(@PathVariable String companyId){
+        return ResponseEntity.ok(crewService.getAllCrew(companyId));
     }
 
     // CONTROLLERS adding new crew
@@ -39,7 +39,7 @@ public class CrewController {
         return ResponseEntity.ok(crewService.updateCrew(id, updates));
     }
 
-    @Operation(tags = "ET: Crew" ,description = "Update the crews")
+    @Operation(tags = "ET: Crew" ,description = "delete the crews")
     @DeleteMapping("/delete-crew/{id}")
     public ResponseEntity<String> delete_crew(@PathVariable String id) {
         return ResponseEntity.ok(crewService.deleteCrew(id));

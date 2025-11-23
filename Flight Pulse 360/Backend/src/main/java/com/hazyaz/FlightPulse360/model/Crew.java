@@ -10,10 +10,13 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 public class Crew {
 
+
     @Id
     @GeneratedValue(generator = "Id-Generator")
     @GenericGenerator(name = "Id-Generator", strategy = "com.hazyaz.FlightPulse360.util.UniqueIdGenerator")
     private String cr_id;
+
+    private String uxUniversalCompanyId;
 
     private String cr_name;
     private String cr_type; // Can be Ground Staff, Cabin Attendant, Pilot and other
@@ -35,4 +38,9 @@ public class Crew {
 
 //  figure out a way to store all the list of documents
     private String ac_documents;
+
+
+    public String getPrefix() {
+        return "CR";
+    }
 }

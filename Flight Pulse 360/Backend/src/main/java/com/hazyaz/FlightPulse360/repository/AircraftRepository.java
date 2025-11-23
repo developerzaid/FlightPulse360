@@ -5,8 +5,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @Repository
 public interface AircraftRepository extends JpaRepository<Aircraft, String> {
 
+
+    List<Aircraft> findAllByUxUniversalCompanyId(String companyId);
 //    Add custom method later when needed
 }

@@ -1,8 +1,8 @@
 package com.hazyaz.FlightPulse360.service;
 
-import com.hazyaz.FlightPulse360.model.Aircraft;
-import com.hazyaz.FlightPulse360.model.Vendor;
-import com.hazyaz.FlightPulse360.repository.VendorRepository;
+import com.hazyaz.FlightPulse360.model.Client;
+import com.hazyaz.FlightPulse360.model.Crew;
+import com.hazyaz.FlightPulse360.repository.ClientRepository;
 import com.hazyaz.FlightPulse360.util.FieldsUpdater;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,26 +12,23 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class VendorService {
+public class ClientService {
 
     @Autowired
-    VendorRepository vendorRepository;
+    ClientRepository clientRepository;
+
     @Autowired
     FieldsUpdater fieldsUpdater;
 
-    public List<Vendor> getAllVendor(String CompanyId){
-       return vendorRepository.findAllByUxUniversalCompanyId(CompanyId);
+    public List<Client> getAllClient(String CompanyId){
+        return clientRepository.findAllByUxUniversalCompanyId(CompanyId);
     }
 
-    public Vendor addVendor(Vendor vendor){
-        return vendorRepository.save(vendor);
-    }
+    public Client updateClient(String id, Map<String, Object> updates){
+        Client existingCrew = clientRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Client not found"));
 
-    public Vendor updateVendor(String id, Map<String, Object> updates){
-        Vendor existingVendor = vendorRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Aircraft not found"));
-
-        Class<?> clazz = Vendor.class;
+        Class<?> clazz = Client.class;
         for (Map.Entry<String, Object> entry : updates.entrySet()) {
             String fieldName = entry.getKey();
             Object value = entry.getValue();
@@ -41,7 +38,7 @@ public class VendorService {
                 field.setAccessible(true);
 
                 Object converted = fieldsUpdater.convertValue(field.getType(), value);
-                field.set(existingVendor, converted);
+                field.set(existingCrew, converted);
 
             } catch (NoSuchFieldException e) {
                 System.out.println("Skipping unknown field: " + fieldName);
@@ -49,11 +46,18 @@ public class VendorService {
                 throw new RuntimeException(e);
             }
         }
-        return vendorRepository.save(existingVendor);
+        return clientRepository.save(existingCrew);
     }
 
-    public String deleteVendor(String id){
-        return "Vendor Deleted";
+
+
+    public Client addClient(Client client){
+        return clientRepository.save(client);
+    }
+
+    public String deleteClient(String id){
+        clientRepository.deleteById(id);
+        return "Client Deleted";
     }
 
 }

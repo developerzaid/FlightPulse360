@@ -3,6 +3,7 @@ package com.hazyaz.FlightPulse360.authentication;
 
 import com.hazyaz.FlightPulse360.dto.UserLogin;
 import com.hazyaz.FlightPulse360.dto.UserRegistration;
+import com.hazyaz.FlightPulse360.model.User;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,7 +24,7 @@ public class AuthenticationController {
     @Operation(tags = "Authentication " ,description = "shows the login screen for the user")
     @PostMapping("/login")
     public String auth_login(@RequestBody UserLogin userLogin){
-        authenticationService.loginUserWithDetails(userLogin);
+
         return "This is a login screen";
     }
 

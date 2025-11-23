@@ -1,56 +1,60 @@
 package com.hazyaz.FlightPulse360.model.TS;
 
-import java.time.LocalDateTime;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 
+import java.time.LocalDateTime;
+import java.util.List;
+@Entity
+@Data
 public class CrewConcierge {
 
-    // Primary Keys & References
-    private String serviceId; // UUID
-    private String groundHandlingServiceId; // FK to main TS service
-    private String serviceRequestId; // FK to main service request
-    private String serviceName;
+    private String uxTripId; // Universal Trip ID for
+
+    @Id
+    @GeneratedValue(generator = "Id-Generator")
+    @GenericGenerator(name = "Id-Generator", strategy = "com.hazyaz.FlightPulse360.util.UniqueIdGenerator")
+    private String crc_serviceId;
+
+    public String getPrefix() {
+        return "TPSRV-CRC";
+    }
+
+    private String crc_serviceName;
 
     // Crew Members
-    private Integer totalCrewMembers;
-    private Integer pilots;
-    private Integer flightAttendants;
+    private Integer crc_totalCrewMembers;
+    private Integer crc_pilots;
+    private Integer crc_flightAttendants;
 
     // Hotel Arrangements
-    private Boolean crewHotelRequired;
-    private String hotelName;
-    private String hotelAddress;
-    private String hotelContactNumber;
-    private Integer roomsRequired;
-    private LocalDateTime hotelCheckIn;
-    private LocalDateTime hotelCheckOut;
-    private Integer numberOfNights;
-    private String roomType; // STANDARD, DELUXE
-    private Boolean breakfastIncluded;
-    private String hotelCostPerRoom;
-    private String totalHotelCost;
+    private String crc_hotelName;
+    private String crc_hotelAddress;
+    private String crc_hotelContactNumber;
+    private Integer crc_roomsRequired;
+    private LocalDateTime crc_hotelCheckIn;
+    private LocalDateTime crc_hotelCheckOut;
+    private Integer crc_numberOfNights;
 
     // Crew Transportation
-    private Boolean crewTransportRequired;
-    private String transportType; // VAN, SEDAN
-    private String transportProvider;
-    private String driverName;
-    private String driverContact;
+    private String crc_transportType; // VAN, SEDAN
+    private String crc_transportProvider;
+    private String crc_driverName;
+    private String crc_driverContact;
 
     // Airport to Hotel
-    private Boolean airportToHotelTransport;
-    private LocalDateTime pickupTimeFromAirport;
-    private String pickupLocationAirport; // FBO location
+    private LocalDateTime crc_pickupTimeFromAirport;
+    private String crc_pickupLocationAirport;
 
     // Hotel to Airport
-    private Boolean hotelToAirportTransport;
-    private LocalDateTime pickupTimeFromHotel;
+    private LocalDateTime crc_pickupTimeFromHotel;
 
-    private String transportCost;
-    private String totalConciergeCost;
-    private String conciergeNotes;
-
-    private String serviceStatus; // REQUESTED, CONFIRMED, IN_PROGRESS, COMPLETED, CANCELLED
-    private String fl_payment; // Processing, Servicing, Invoiced, Payment received {This is for sales team}
-
+    private List<String> vn_documents;
+    private String crc_additionalNotes;
+    private String crc_serviceStatus; // REQUESTED, CONFIRMED, IN_PROGRESS, COMPLETED, CANCELLED
+    private String crc_payment; // Processing, Servicing, Invoiced, Payment received {This is for sales team}
 
 }

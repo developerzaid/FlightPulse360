@@ -20,9 +20,9 @@ public class VendorController {
 
     // CONTROLLERS FOR LOGING IN USER
     @Operation(tags = "ET: Vendor" ,description = "shows all the vendors in the list")
-    @GetMapping("/all-vendor")
-    public ResponseEntity<List<Vendor>> all_vendor(){
-        return ResponseEntity.ok(vendorService.getAllVendor());
+    @GetMapping("/all-vendor/{companyId}")
+    public ResponseEntity<List<Vendor>> all_vendor(@PathVariable String companyId){
+        return ResponseEntity.ok(vendorService.getAllVendor(companyId));
     }
 
     // CONTROLLERS FOR SIGNING UP NEW USER

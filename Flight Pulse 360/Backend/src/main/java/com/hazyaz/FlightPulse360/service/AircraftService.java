@@ -26,8 +26,8 @@ public class AircraftService{
        aircraftRepository.save(aircraft);
     }
 
-    public List<Aircraft> getAllAircraft(){
-        return aircraftRepository.findAll();
+    public List<Aircraft> getAllAircraft(String CompanyId){
+        return aircraftRepository.findAllByUxUniversalCompanyId(CompanyId);
     }
 
     public Aircraft updateAircraft(String id, Map<String,Object> updates){

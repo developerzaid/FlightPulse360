@@ -1,15 +1,21 @@
 package com.hazyaz.FlightPulse360.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 
 @Data
 @Entity
 public class Client {
 
     @Id
+    @GeneratedValue(generator = "Id-Generator")
+    @GenericGenerator(name = "Id-Generator", strategy = "com.hazyaz.FlightPulse360.util.UniqueIdGenerator")
     private String ct_id;
+
+    private String uxUniversalCompanyId;
 
     private String ct_name;
     private String ct_company;
@@ -37,4 +43,11 @@ public class Client {
 //  figure out a way to store all the list of documents
     private String ct_documents;
 
+
+
+
+
+    public String getPrefix() {
+        return "CL";
+    }
 }

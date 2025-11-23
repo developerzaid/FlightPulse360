@@ -15,6 +15,10 @@ public class Aircraft {
     @GenericGenerator(name = "Id-Generator", strategy = "com.hazyaz.FlightPulse360.util.UniqueIdGenerator")
     private String ac_Id;
 
+
+    private String uxUniversalCompanyId;
+
+
     private String ac_TailNo;
     private String ac_Type;
     private String ac_Manufacturer;
@@ -22,8 +26,8 @@ public class Aircraft {
     private String ac_YearManufactured;
     private String ac_PassengerCapacity;
     private String ac_MaxRange;
-//    private String ac_CruiseSpeed;
-    private String  AC_CRUISESPEED;
+    private String ac_CruiseSpeed;
+
 
     private String ac_FuelCapacity;
     private String ac_WingSpan;
@@ -36,22 +40,22 @@ public class Aircraft {
     private String ac_InsuranceDetails;
     private String ac_Notes;
 
-    //    figure out a way to store all the list of documents
+//    figure out a way to store all the list of documents
     private String ac_documents;
 
 //    Main link with the user
-    private String uxUniversalLicense;
+
 
     public String getPrefix() {
         return "AC";
     }
 
-    public String getAcId() {
+    public String getAc_Id() {
         return ac_Id;
     }
 
-    public String setAcId(){
-        return ac_Id;
+    public void setAc_Id(String ac_Id) {
+        this.ac_Id = ac_Id;
     }
 
     public String getAc_TailNo() {
@@ -110,12 +114,12 @@ public class Aircraft {
         this.ac_MaxRange = ac_MaxRange;
     }
 
-    public String getAC_CRUISESPEED() {
-        return AC_CRUISESPEED;
+    public String getAc_CruiseSpeed() {
+        return ac_CruiseSpeed;
     }
 
-    public void setAC_CRUISESPEED(String AC_CRUISESPEED) {
-        this.AC_CRUISESPEED = AC_CRUISESPEED;
+    public void setAc_CruiseSpeed(String ac_CruiseSpeed) {
+        this.ac_CruiseSpeed = ac_CruiseSpeed;
     }
 
     public String getAc_FuelCapacity() {
@@ -182,11 +186,11 @@ public class Aircraft {
         this.ac_documents = ac_documents;
     }
 
-    public String getUxUniversalLicense() {
-        return uxUniversalLicense;
+    public String getUxUniversalCompanyId() {
+        return uxUniversalCompanyId;
     }
 
-    public void setUxUniversalLicense(String uxUniversalLicense) {
-        this.uxUniversalLicense = uxUniversalLicense;
+    public void setUxUniversalCompanyId(String uxUniversalCompanyId) {
+        this.uxUniversalCompanyId = uxUniversalCompanyId;
     }
 }

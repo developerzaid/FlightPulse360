@@ -1,59 +1,55 @@
 package com.hazyaz.FlightPulse360.model.TS;
 
-import java.time.LocalDateTime;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 
+import java.time.LocalDateTime;
+import java.util.List;
+@Entity
+@Data
 public class PassengerConcierge {
 
-    // Primary Keys & References
-    private String serviceId; // UUID
-    private String groundHandlingServiceId; // FK to main TS service
-    private String serviceRequestId; // FK to main service request
-    private String serviceName;
+    private String uxTripId; // Universal Trip ID for
+
+    @Id
+    @GeneratedValue(generator = "Id-Generator")
+    @GenericGenerator(name = "Id-Generator", strategy = "com.hazyaz.FlightPulse360.util.UniqueIdGenerator")
+    private String pc_serviceId;
+
+    public String getPrefix() {
+        return "TPSRV-PC";
+    }
+    private String pc_serviceName;
 
     // Passenger Ground Transportation
-    private Boolean passengerTransportRequired;
-    private Integer passengersRequiringTransport;
-    private String transportDestination; // hotel, residence, office, meeting venue
-    private String transportType; // LUXURY_SEDAN, LIMOUSINE, SUV, VAN, HELICOPTER
-    private Integer vehiclesRequired;
-    private String transportProvider;
-    private String chauffeurName;
-    private String chauffeurContact;
-    private String vehicleType; // Mercedes S-Class, Range Rover, etc.
-    private LocalDateTime pickupTime;
-    private String pickupLocation;
-    private String transportCost;
+    private Integer pc_passengersRequiringTransport;
+    private String pc_transportDestination; // hotel, residence, office, meeting venue
+    private String pc_transportType; // LUXURY_SEDAN, LIMOUSINE, SUV, VAN, HELICOPTER
+
+    private String pc_transportProvider;
+    private String pc_chauffeurName;
+    private String pc_chauffeurContact;
+    private String pc_vehicleType; // Mercedes S-Class, Range Rover, etc.
+    private LocalDateTime pc_pickupTime;
+    private String pc_pickupLocation;
+
 
     // Passenger Hotel (if arranging)
-    private Boolean passengerHotelRequired;
-    private String passengerHotelName;
-    private String passengerHotelAddress;
-    private Integer passengerRoomsRequired;
-    private LocalDateTime passengerCheckIn;
-    private LocalDateTime passengerCheckOut;
-    private String passengerRoomType; // SUITE, PRESIDENTIAL, DELUXE
-    private String passengerHotelCost;
+    private String pc_passengerHotelName;
+    private String pc_passengerHotelAddress;
+    private Integer pc_passengerRoomsRequired;
+    private LocalDateTime pc_passengerCheckIn;
+    private LocalDateTime pc_passengerCheckOut;
+    private String pc_passengerRoomType; // SUITE, PRESIDENTIAL, DELUXE
 
-    // VIP Services
-    private Boolean vipMeetAndGreet;
-    private String vipGreeterName;
-    private Boolean redCarpetService;
-    private Boolean photographyService;
-    private Boolean securityEscort;
-    private Boolean airportLoungeAccess;
 
-    // Additional Concierge
-    private Boolean restaurantReservations;
-    private String restaurantDetails;
-    private Boolean eventTickets;
-    private String eventDetails;
-    private Boolean translatorRequired;
-    private String translatorLanguages;
-    private String specialRequests;
-    private String passengerConciergeCost;
-    private String passengerConciergeNotes;
-
-    private String serviceStatus; // REQUESTED, CONFIRMED, IN_PROGRESS, COMPLETED, CANCELLED
-    private String fl_payment; // Processing, Servicing, Invoiced, Payment received {This is for sales team}
+    private List<String> pc_documents;
+    private String pc_additionalNotes;
+    private String pc_status; // processing, ongoing  {This is for ops team}
+    private String pc_serviceStatus; // REQUESTED, CONFIRMED, IN_PROGRESS, COMPLETED, CANCELLED
+    private String pc_payment; //
 
 }
